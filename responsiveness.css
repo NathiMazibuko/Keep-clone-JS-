@@ -1,0 +1,121 @@
+/* ==========================================================================
+   GOOGLE KEEP CLONE - RESPONSIVE STYLES (responsiveness.css)
+   ========================================================================== */
+
+/* Fluid container spacing and typography using clamp() */
+:root {
+  --main-padding: clamp(12px, 3vw, 32px);
+  --header-gap: clamp(4px, 1.5vw, 16px);
+  --grid-gap: clamp(10px, 2vw, 16px);
+}
+
+.main-content {
+  padding: var(--main-padding) var(--main-padding) 64px;
+}
+
+.notes-grid {
+  gap: var(--grid-gap);
+}
+
+/* Tablet & Mobile Breakpoints (Minimal Media Queries) */
+
+@media (max-width: 768px) {
+  /* Header adjustments */
+  .header-left {
+    min-width: auto;
+  }
+
+  .brand-text {
+    display: none;
+  }
+
+  .header-center {
+    margin: 0 8px;
+  }
+
+  .search-bar {
+    height: 42px;
+  }
+
+  .header-right {
+    gap: 0;
+  }
+
+  #apps-btn, #refresh-btn {
+    display: none;
+  }
+
+  /* Sidebar transforms into mobile drawer */
+  .sidebar {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 280px !important;
+    height: calc(100vh - var(--header-height));
+    z-index: 120;
+    transform: translateX(-100%);
+    transition: transform var(--transition-smooth);
+    background-color: var(--bg-primary);
+    box-shadow: var(--shadow-drawer);
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-nav {
+    position: static;
+    width: 100% !important;
+    height: 100%;
+    box-shadow: none !important;
+  }
+
+  /* Always show full nav items on mobile drawer */
+  .sidebar .nav-link {
+    width: calc(100% - 12px) !important;
+    height: 48px !important;
+    border-radius: 0 24px 24px 0 !important;
+    padding: 0 12px 0 24px !important;
+    margin: 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .sidebar .icon-wrapper {
+    margin-right: 28px !important;
+  }
+
+  .sidebar .nav-label {
+    opacity: 1 !important;
+    width: auto !important;
+    pointer-events: auto !important;
+  }
+
+  /* Note cards on touch devices always show actions */
+  .note-card .card-actions {
+    opacity: 1;
+  }
+
+  .note-card .card-pin-btn {
+    opacity: 0.8;
+  }
+
+  .note-card .card-select-btn {
+    display: none; /* Checkmark badge can be omitted or tap-selected on mobile */
+  }
+
+  /* Creation area full width on mobile */
+  .note-creator-wrapper {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-card {
+    width: 95%;
+    padding: 12px;
+  }
+}
